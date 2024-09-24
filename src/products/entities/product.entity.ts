@@ -1,6 +1,10 @@
 // src/products/entities/product.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Category } from 'src/category/entities/category.entity';// Import Category entity
+import { Bill } from 'src/bills/entities/bill.entity';
+import { Supplier } from 'src/supplier/entities/supplier.entity';
+import { CustProd } from 'src/cust-prod/entities/cust-prod.entity';
+import { ProdSupp } from 'src/prod-supp/entities/prod-supp.entity';
 
 @Entity()
 export class Product {
@@ -24,4 +28,18 @@ export class Product {
 
   @Column()
   cateId: number;  // Foreign key column (Category ID)
+
+ @OneToMany(() => Bill, bill => bill.product)
+bills: Bill[];
+
+@OneToMany(() => Supplier, supplier => supplier.product)
+suppliers: Supplier[];
+
+
+@OneToMany(() => CustProd, custProd => custProd.product) // Create relation with CustProd
+custProds: CustProd[];
+
+@OneToMany(() => ProdSupp, (prodSupp) => prodSupp.product) // Create relation with ProdSupp
+prodSupp: ProdSupp[];
+
 }

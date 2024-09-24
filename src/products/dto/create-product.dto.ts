@@ -5,5 +5,7 @@ export class CreateProductDto {
     stockQuantity: number;  // Stock quantity
     price: number;          // Price of the product
     cateId: number;         // Category ID as a foreign key
+
+    
   }
   

@@ -17,5 +17,11 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": [
+    "src/**/*" // Include all your source files
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
