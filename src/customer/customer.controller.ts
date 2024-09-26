@@ -18,6 +18,12 @@ export class CustomerController {
   findAll() {
     return this.customerService.findAll();
   }
+  
+  // Retrieve all customers
+  @Get('User')
+  findCustomerINfo() {
+    return this.customerService.findCustomerINfo();
+  }
 
   // Retrieve a customer by ID
   @Get(':id')

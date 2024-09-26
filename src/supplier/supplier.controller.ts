@@ -54,6 +54,16 @@ export class SuppliersController {
     return this.suppliersService.findAll();
   }
 
+  @Get('User')
+  async findSupplierInfo(): Promise<Supplier[]> {
+    return this.suppliersService.findSupplierInfo();
+  }
+
+  @Get('user/category')
+  async findSupplierwithCat(): Promise<Supplier[]> {
+    return this.suppliersService.findSupplierwithCat();
+  }
+  
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Supplier> {
     return this.suppliersService.findOne(+id);

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { JwtAuthGuard } from 'src/authentication/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -13,8 +14,13 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @UseGuards(JwtAuthGuard)
+  findAll(  @Query('page') page: number,
+  @Query('limit') limit: number,
+  @Query('search') search: string,
+  @Query('sortField') sortField: string,
+  @Query('sortOrder') sortOrder: 'ASC' | 'DESC') {
+    return this.usersService.findAll(page, limit, search, sortField, sortOrder);
   }
 
   @Get(':id')

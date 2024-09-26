@@ -1,6 +1,7 @@
-import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
+import { MigrationInterface, QueryRunner, TableForeignKey } from "typeorm";
 
-export class AddRelations1727170729093 implements MigrationInterface {
+export class Relationtable1727182306787 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         // User to Employee Relation
         await queryRunner.createForeignKey('employee', new TableForeignKey({

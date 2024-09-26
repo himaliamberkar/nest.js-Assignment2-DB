@@ -1,5 +1,5 @@
 // src/products/entities/product.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 import { Category } from 'src/category/entities/category.entity';// Import Category entity
 import { Bill } from 'src/bills/entities/bill.entity';
 import { Supplier } from 'src/supplier/entities/supplier.entity';
@@ -41,5 +41,20 @@ custProds: CustProd[];
 
 @OneToMany(() => ProdSupp, (prodSupp) => prodSupp.product) // Create relation with ProdSupp
 prodSupp: ProdSupp[];
+
+@CreateDateColumn({ name: 'createdAt' })
+createdAt: Date;
+
+@UpdateDateColumn({ name: 'updatedAt' })
+updatedAt: Date;
+
+@DeleteDateColumn({ name: 'deletedAt' })
+deletedAt: Date;
+
+@Column({ name: 'createdBy', type: 'varchar', length: 255, nullable: true })
+createdBy: string;
+
+@Column({ name: 'updatedBy', type: 'varchar', length: 255, nullable: true })
+updatedBy: string;
 
 }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 import { Customer } from 'src/customer/entities/customer.entity';
 import { Employee } from 'src/employee/entities/employee.entity';
 import { Bill } from 'src/bills/entities/bill.entity';
@@ -20,6 +20,9 @@ export class User {
 
   @Column()
   age: number;
+
+  @Column({ unique: true })
+  password: string;
   @OneToMany(() => Customer, customer => customer.user)
   customers: Customer[];
 
@@ -32,4 +35,18 @@ export class User {
   @OneToMany(() => Supplier, supplier => supplier.user)
   suppliers: Supplier[];
 
+  @CreateDateColumn({ name: 'createdAt' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updatedAt' })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ name: 'deletedAt' })
+  deletedAt: Date;
+
+  @Column({ name: 'createdBy', type: 'varchar', length: 255, nullable: true })
+  createdBy: string;
+
+  @Column({ name: 'updatedBy', type: 'varchar', length: 255, nullable: true })
+  updatedBy: string;
 }

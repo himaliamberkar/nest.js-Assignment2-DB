@@ -31,6 +31,10 @@ export class CustomerService {
 
   // Logic for retrieving all customers
   async findAll(): Promise<Customer[]> {
+    return this.customerRepository.find(); // Include the associated user
+  }
+
+  async findCustomerINfo(): Promise<Customer[]> {
     return this.customerRepository.find({ relations: ['user'] }); // Include the associated user
   }
 

@@ -38,6 +38,15 @@ export class SuppliersService {
     return this.supplierRepository.find();
   }
 
+  async findSupplierInfo(): Promise<Supplier[]> {
+    return this.supplierRepository.find({ relations: ['user'] });
+  }
+
+  async findSupplierwithCat(): Promise<Supplier[]> {
+    return this.supplierRepository.find({ relations: ['user','category'] });
+  }
+
+
   // Retrieve a supplier by ID
   async findOne(suppId: number): Promise<Supplier> {
     const supplier = await this.supplierRepository.findOne({ where: { id:suppId } });

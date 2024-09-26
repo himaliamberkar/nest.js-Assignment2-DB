@@ -19,6 +19,11 @@ export class EmployeeController {
     return this.employeeService.findAll();
   }
 
+  @Get('user')
+  findemployeeinfo() {
+    return this.employeeService.findemployeeinfo();
+  }
+
   // Retrieve a single employee by ID
   @Get(':id')
   findOne(@Param('id') id: string) {

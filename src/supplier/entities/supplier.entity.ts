@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { Category } from 'src/category/entities/category.entity';
 import { Product } from 'src/products/entities/product.entity';
@@ -37,4 +37,19 @@ export class Supplier {
 
   @Column({ nullable:true })
   quantity: number;
+
+  @CreateDateColumn({ name: 'createdAt' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updatedAt' })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ name: 'deletedAt' })
+  deletedAt: Date;
+
+  @Column({ name: 'createdBy', type: 'varchar', length: 255, nullable: true })
+  createdBy: string;
+
+  @Column({ name: 'updatedBy', type: 'varchar', length: 255, nullable: true })
+  updatedBy: string;
 }

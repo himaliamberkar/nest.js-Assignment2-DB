@@ -32,6 +32,11 @@ export class EmployeeService {
 
   // Logic for retrieving all employees
   async findAll(): Promise<Employee[]> {
+    return this.employeeRepository.find() // Include the associated user
+  }
+
+  // Logic for retrieving all employees
+  async findemployeeinfo(): Promise<Employee[]> {
     return this.employeeRepository.find({ relations: ['user'] }); // Include the associated user
   }
 
