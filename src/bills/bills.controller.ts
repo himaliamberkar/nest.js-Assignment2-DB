@@ -16,6 +16,10 @@ export class BillsController {
   findAll() {
     return this.billsService.findAll();
   }
+  @Get('user/category/product')
+  findAllBillInfo() {
+    return this.billsService.findAllBillInfo();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

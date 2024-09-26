@@ -5,6 +5,7 @@ import { CreateBillDto } from './dto/create-bill.dto';
 import { UpdateBillDto } from './dto/update-bill.dto';
 import { Bill } from './entities/bill.entity';
 
+
 @Injectable()
 export class BillsService {
   constructor(
@@ -19,7 +20,12 @@ export class BillsService {
   async findAll(): Promise<Bill[]> {
     return this.billRepository.find();
   }
-
+  
+  
+  async findAllBillInfo(): Promise<Bill[]> {
+    return this.billRepository.find({ relations: ['user','category','product'] });
+  }
+  
   async findOne(id: number): Promise<Bill> {
     const bill = await this.billRepository.findOne({ where: { billId: id } });
     if (!bill) {

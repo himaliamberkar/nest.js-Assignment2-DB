@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { Product } from 'src/products/entities/product.entity';
 import { Category } from 'src/category/entities/category.entity';
@@ -20,13 +20,16 @@ export class Bill {
   @Column()
   billDate: Date;
 
-  @ManyToOne(() => User, user => user.bills)
+  @ManyToOne(() => User, user => user.bills,{ onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
   user: User;
 
-  @ManyToOne(() => Category, category => category.bills)
+  @ManyToOne(() => Category, category => category.bills,{ onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'cateId' })
   category: Category;
 
-  @ManyToOne(() => Product, product => product.bills)
+  @ManyToOne(() => Product, product => product.bills,{ onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'prodId' })
   product: Product;
 
   @CreateDateColumn({ name: 'createdAt' })
