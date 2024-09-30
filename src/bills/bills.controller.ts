@@ -9,30 +9,31 @@ export class BillsController {
 
   @Post()
   create(@Body() createBillDto: CreateBillDto) {
-    return this.billsService.create(createBillDto);
+    return this.billsService.createBill(createBillDto);
   }
 
-  @Get()
-  findAll() {
-    return this.billsService.findAll();
-  }
-  @Get('user/category/product')
-  findAllBillInfo() {
-    return this.billsService.findAllBillInfo();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.billsService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.billsService.findOne(+id);
-  }
+  // // @Get('user/category/product')
+  // // findAllBillInfo() {
+  // //   return this.billsService.findAllBillInfo();
+  // // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBillDto: UpdateBillDto) {
-    return this.billsService.update(+id, updateBillDto);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.billsService.findOne(+id);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.billsService.remove(+id);
-  }
+  // // @Patch(':id')
+  // // update(@Param('id') id: string, @Body() updateBillDto: UpdateBillDto) {
+  // //   return this.billsService.update(+id, updateBillDto);
+  // // }
+
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.billsService.remove(+id);
+  // }
 }

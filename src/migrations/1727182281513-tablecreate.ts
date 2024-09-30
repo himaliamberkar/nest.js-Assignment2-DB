@@ -50,15 +50,12 @@ export class Tablecreate1727182281513 implements MigrationInterface {
             ]
         }));
 
-        // Create Supplier Table
+        //Craete Order Table
         await queryRunner.createTable(new Table({
-            name: 'supplier',
+            name: 'order',
             columns: [
                 { name: 'id', type: 'int', isPrimary: true, isGenerated: true,generationStrategy: "increment" },
-                { name: 'userId', type: 'int' },
-                { name: 'cateId', type: 'int', isNullable: true },
-                { name: 'prodId', type: 'int', isNullable: true },
-                { name: 'quantity', type: 'int', isNullable: true },
+                { name: 'custId', type: 'int' },
                 { name: 'createdAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
                 { name: 'updatedAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
                 { name: 'deletedAt', type: 'timestamp', isNullable: true },
@@ -67,6 +64,7 @@ export class Tablecreate1727182281513 implements MigrationInterface {
             ]
         }));
 
+   
         // Create Category Table
         await queryRunner.createTable(new Table({
             name: 'category',
@@ -100,15 +98,50 @@ export class Tablecreate1727182281513 implements MigrationInterface {
             ]
         }));
 
+             // Create Supplier Table
+             await queryRunner.createTable(new Table({
+                name: 'supplier',
+                columns: [
+                    { name: 'id', type: 'int', isPrimary: true, isGenerated: true,generationStrategy: "increment" },
+                    { name: 'userId', type: 'int' },
+                    { name: 'cateId', type: 'int', isNullable: true },
+                    { name: 'prodId', type: 'int', isNullable: true },
+                    { name: 'quantity', type: 'int', isNullable: true },
+                    { name: 'createdAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
+                    { name: 'updatedAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
+                    { name: 'deletedAt', type: 'timestamp', isNullable: true },
+                    { name: 'createdBy', type: 'varchar', length: '255', isNullable: true },
+                    { name: 'updatedBy', type: 'varchar', length: '255', isNullable: true }
+                ]
+            }));
+    
+         
+        //create Pruchase Table 
+
+        await queryRunner.createTable(new Table({
+            name: 'purchaseitem',
+            columns: [
+                { name: 'id', type: 'int', isPrimary: true, isGenerated: true,generationStrategy: "increment" },
+                { name: 'orderId', type: 'int' },
+                { name: 'prodId', type: 'int' },
+                { name: 'quantity', type: 'int' },
+                { name: 'createdAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
+                { name: 'updatedAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
+                { name: 'deletedAt', type: 'timestamp', isNullable: true },
+                { name: 'createdBy', type: 'varchar', length: '255', isNullable: true },
+                { name: 'updatedBy', type: 'varchar', length: '255', isNullable: true }
+            ]
+        }));
+
         // Create Bill Table
         await queryRunner.createTable(new Table({
             name: 'bill',
             columns: [
                 { name: 'billId', type: 'int', isPrimary: true, isGenerated: true,generationStrategy: "increment" },
-                { name: 'userId', type: 'int' },
-                { name: 'cateId', type: 'int' },
-                { name: 'prodId', type: 'int' },
-                { name: 'billDate', type: 'date' },
+                { name: 'custId', type: 'int' },
+                { name: 'orderId', type: 'int' },
+                { name: 'amount', type: 'int' },
+                { name: 'billDate', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
                  { name: 'createdAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
                 { name: 'updatedAt', type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
                 { name: 'deletedAt', type: 'timestamp', isNullable: true },
@@ -168,9 +201,11 @@ export class Tablecreate1727182281513 implements MigrationInterface {
         await queryRunner.dropTable('prod_supp');
         await queryRunner.dropTable('cust_prod');
         await queryRunner.dropTable('bill');
+        await queryRunner.dropTable('purchaseitem');
         await queryRunner.dropTable('product');
         await queryRunner.dropTable('category');
         await queryRunner.dropTable('supplier');
+        await queryRunner.dropTable('order');
         await queryRunner.dropTable('customer');
         await queryRunner.dropTable('employee');
         await queryRunner.dropTable('user');

@@ -5,7 +5,7 @@ import { Bill } from 'src/bills/entities/bill.entity';
 import { Supplier } from 'src/supplier/entities/supplier.entity';
 
 
-@Entity()
+@Entity('category')
 export class Category {
   @PrimaryGeneratedColumn()
   cateId: number; // Primary key for the category
@@ -20,8 +20,8 @@ export class Category {
   @OneToMany(() => Product, product => product.category)
   products: Product[];
 
-  @OneToMany(() => Bill, bill => bill.category)
-bills: Bill[];
+//   @OneToMany(() => Bill, bill => bill.category)
+// bills: Bill[];
 
 @OneToMany(() => Supplier, supplier => supplier.category)
 suppliers: Supplier[];

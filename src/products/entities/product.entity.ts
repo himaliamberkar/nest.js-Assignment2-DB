@@ -5,8 +5,9 @@ import { Bill } from 'src/bills/entities/bill.entity';
 import { Supplier } from 'src/supplier/entities/supplier.entity';
 import { CustProd } from 'src/cust-prod/entities/cust-prod.entity';
 import { ProdSupp } from 'src/prod-supp/entities/prod-supp.entity';
+import { PurchaseItem } from 'src/purchaseitem/entities/purchaseitem.entity';
 
-@Entity()
+@Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
   prodId: number;  // Primary key for the product
@@ -26,11 +27,15 @@ export class Product {
   @ManyToOne(() => Category, category => category.cateId, { onDelete: 'CASCADE' }) // Foreign key to Category
   category: Category;
 
+
+  @OneToMany(() => PurchaseItem, (purchaseItem) => purchaseItem.product)
+  purchaseItems: PurchaseItem[];
+
   @Column()
   cateId: number;  // Foreign key column (Category ID)
 
- @OneToMany(() => Bill, bill => bill.product)
-bills: Bill[];
+//  @OneToMany(() => Bill, bill => bill.product)
+// bills: Bill[];
 
 @OneToMany(() => Supplier, supplier => supplier.product)
 suppliers: Supplier[];

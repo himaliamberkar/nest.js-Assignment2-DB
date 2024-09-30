@@ -1,15 +1,11 @@
-import { IsNotEmpty, IsDate } from 'class-validator';
+import { IsNotEmpty,IsInt } from "class-validator";
 
 export class CreateBillDto {
   @IsNotEmpty()
-  userId: number;
+  @IsInt()
+  custId: number; // Customer ID
 
   @IsNotEmpty()
-  cateId: number;
-
-  @IsNotEmpty()
-  prodId: number;
-
-  @IsDate()
-  billDate: Date;
+  @IsInt()
+  orderId: number; // Order ID
 }

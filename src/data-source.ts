@@ -7,7 +7,6 @@ import { Category } from './category/entities/category.entity';
 import { Product } from './products/entities/product.entity';
 import { Bill } from './bills/entities/bill.entity';
 import { CustProd } from './cust-prod/entities/cust-prod.entity';
-import { EmpCust } from './emp-cust/entities/emp-cust.entity';
 import { ProdSupp } from './prod-supp/entities/prod-supp.entity';
 import * as path from 'path';
 

@@ -19,13 +19,9 @@ export class Relationtable1727182306787 implements MigrationInterface {
             onDelete: 'CASCADE',
         }));
 
-        // User to Supplier Relation
-        await queryRunner.createForeignKey('supplier', new TableForeignKey({
-            columnNames: ['userId'],
-            referencedTableName: 'user',
-            referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-        }));
+        
+
+       
 
         // Category to Product Relation
         await queryRunner.createForeignKey('product', new TableForeignKey({
@@ -35,29 +31,71 @@ export class Relationtable1727182306787 implements MigrationInterface {
             onDelete: 'CASCADE',
         }));
 
-        // Bill to User Relation
-        await queryRunner.createForeignKey('bill', new TableForeignKey({
+        await queryRunner.createForeignKey('order', new TableForeignKey({
+            columnNames: ['custId'],
+            referencedTableName: 'customer',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+        }));
+
+         // User to Supplier Relation
+         await queryRunner.createForeignKey('supplier', new TableForeignKey({
             columnNames: ['userId'],
             referencedTableName: 'user',
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
         }));
 
-        // Bill to Category Relation
-        await queryRunner.createForeignKey('bill', new TableForeignKey({
+         // User to Supplier Relation
+         await queryRunner.createForeignKey('supplier', new TableForeignKey({
             columnNames: ['cateId'],
             referencedTableName: 'category',
             referencedColumnNames: ['cateId'],
             onDelete: 'CASCADE',
         }));
 
-        // Bill to Product Relation
-        await queryRunner.createForeignKey('bill', new TableForeignKey({
+         // User to Supplier Relation
+         await queryRunner.createForeignKey('supplier', new TableForeignKey({
             columnNames: ['prodId'],
             referencedTableName: 'product',
             referencedColumnNames: ['prodId'],
             onDelete: 'CASCADE',
         }));
+
+        await queryRunner.createForeignKey('purchaseitem', new TableForeignKey({
+            columnNames: ['orderId'],
+            referencedTableName: 'order',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+        }));
+
+        
+
+        await queryRunner.createForeignKey('purchaseitem', new TableForeignKey({
+            columnNames: ['prodId'],
+            referencedTableName: 'product',
+            referencedColumnNames: ['prodId'],
+            onDelete: 'CASCADE',
+        }));
+
+        // Bill to User Relation
+        await queryRunner.createForeignKey('bill', new TableForeignKey({
+            columnNames: ['custId'],
+            referencedTableName: 'customer',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+        }));
+
+        // Bill to Category Relation
+        await queryRunner.createForeignKey('bill', new TableForeignKey({
+            columnNames: ['orderId'],
+            referencedTableName: 'order',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+        }));
+
+        
+        
 
         // CustProd to Customer Relation
         await queryRunner.createForeignKey('cust_prod', new TableForeignKey({

@@ -1,8 +1,10 @@
 // src/customers/entities/customer.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity'; // Import User entity
-import { EmpCust } from 'src/emp-cust/entities/emp-cust.entity';
+// import { EmpCust } from 'src/emp-cust/entities/emp-cust.entity';
 import { CustProd } from 'src/cust-prod/entities/cust-prod.entity';
+import { Order } from 'src/order/entities/order.entity';
+import { Bill } from 'src/bills/entities/bill.entity';
 
 @Entity()
 export class Customer {
@@ -14,13 +16,19 @@ export class Customer {
 
   @Column()
   userId: number; // User ID as a foreign key
+ 
+  
+  @OneToMany(() => Bill, bill => bill.customer)
+  bills: Bill[];
 
-
-  @OneToMany(() => EmpCust, (empCust) => empCust.customer)
-  empCust: EmpCust[];
+  // @OneToMany(() => EmpCust, (empCust) => empCust.customer)
+  // empCust: EmpCust[];
 
   @OneToMany(() => CustProd, custProd => custProd.customer) // Create relation with CustProd
   custProds: CustProd[];
+
+  @OneToMany(() => Order, (order) => order.customer)
+  orders: Order[]; 
 
   @CreateDateColumn({ name: 'createdAt' })
   createdAt: Date;

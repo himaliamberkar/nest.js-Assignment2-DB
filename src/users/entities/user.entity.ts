@@ -4,7 +4,7 @@ import { Employee } from 'src/employee/entities/employee.entity';
 import { Bill } from 'src/bills/entities/bill.entity';
 import { Supplier } from 'src/supplier/entities/supplier.entity';
 
-@Entity()
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -29,8 +29,6 @@ export class User {
   @OneToMany(() => Employee, employee => employee.user)
   employees: Employee[];
 
-  @OneToMany(() => Bill, bill => bill.user)
-  bills: Bill[];
 
   @OneToMany(() => Supplier, supplier => supplier.user)
   suppliers: Supplier[];

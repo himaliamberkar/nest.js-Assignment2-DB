@@ -1,36 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
-import { User } from 'src/users/entities/user.entity';
-import { Product } from 'src/products/entities/product.entity';
-import { Category } from 'src/category/entities/category.entity';
+import { Customer } from 'src/customer/entities/customer.entity';
+import { Order } from 'src/order/entities/order.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, JoinColumn, OneToOne } from 'typeorm';
 
-@Entity()
+
+@Entity('bill')
 export class Bill {
-  @PrimaryGeneratedColumn()
-  billId: number;
+  @PrimaryGeneratedColumn({ name: 'billId' })
+  billId: number; // Primary key for the bill
+
+  @Column({ name: 'custId' })
+  custId: number; // Customer ID associated with the bill
+
+  @Column({ name: 'orderId' })
+  orderId: number; 
+  // Order ID linked to the bill
 
   @Column()
-  userId: number;
+  amount: number; 
 
-  @Column()
-  cateId: number;
-
-  @Column()
-  prodId: number;
-
-  @Column()
-  billDate: Date;
-
-  @ManyToOne(() => User, user => user.bills,{ onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' })
-  user: User;
-
-  @ManyToOne(() => Category, category => category.bills,{ onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'cateId' })
-  category: Category;
-
-  @ManyToOne(() => Product, product => product.bills,{ onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'prodId' })
-  product: Product;
+  @ManyToOne(() => Customer, customer => customer.bills, { eager: true })
+  @JoinColumn({ name: 'custId' }) // Foreign key in the Bill table
+  customer: Customer; 
+  
+  @OneToOne(() => Order, order => order.bills, { eager: true })
+  @JoinColumn({ name: 'orderId' }) // Foreign key in the Bill table
+  order: Order; // 
 
   @CreateDateColumn({ name: 'createdAt' })
   createdAt: Date;
